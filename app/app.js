@@ -104,7 +104,7 @@ spotiBar.controller("SearchController", [
           function(data) {
             SharingResultsService.data = data.data;
             console.log(data);
-            document.location.href = "/#!/results";
+            document.location.href = "/spotify-recommendations-app-js/#!/results";
           },
           function(error) {
             alert("The access token expired. Please login again.");
