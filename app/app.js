@@ -23,7 +23,7 @@ spotiBar.config([
       });
 
     SpotifyProvider.setClientId("456d199b7ff04a969783dd914c902093");
-    SpotifyProvider.setRedirectUri("http://localhost:8888/callback.html");
+    SpotifyProvider.setRedirectUri("https://miwy.github.io/spotify-recommendations-app-js/callback");
     SpotifyProvider.setScope("playlist-read-private");
 
     if (localStorage.getItem("spotify-token")) {
