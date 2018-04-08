@@ -1,0 +1,21 @@
+<div class="container">
+    <!-- <div class="col-md-2">
+        <button type="button" class="btn btn-default navbar-btn" ng-click="cleanSearch()">Reset search</button>
+    </div> -->
+    <h1 class="spotify-font-artist-name">Results:</h1>
+
+    <div class="justify-content-center row">
+        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 text-center" ng-repeat="track in recommendedTracks" style="padding-left: 5px;padding-right: 5px;">
+
+            <a href="{{track.album.uri}}"><img ng-src="{{track.album.images[1].url}}" alt="" style="width:170px;height:170px;"></a>
+            <br/>
+            <div class="text-center">
+                <p style="margin-bottom: 0px;margin-top: 5px;">
+                    <a class="spotify-font-artist-name" ng-repeat="artist in track.artists" href="{{artist.uri}}">{{artist.name}} </a>
+                </p>
+                <p class="text-warning" style="margin-bottom: 0px;"><a class="text-warning" href="{{track.uri}}">{{track.name}}</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+.navbar-brand {
+	font-family: 'Lobster', cursive;
+    font-size: 24px;
+}
+
+.altbg {
+	background-color: #181818;
+}
+
+.altnavbg {
+	background-color: #121212;
+}
+
+.firstparagraphingrid {
+	margin-top: 5px;
+}
+
+.paragraphingrid {
+	margin-bottom: 0px;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cabin', sans-serif;
+}
+
+img {
+    max-width:90%;
+    height: auto;
+}
+
+.spotify-font-color {
+    color: #999999;
+}
+
+.spotify-font-color:hover {
+    color: #ffffff;
+}
+
+.font-white {
+    color: #ffffff;
+}
+
+.spotify-font-artist-name, .searchresults {
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.spotify-font-artist-name:hover {
+    color: #ffffff;
+}
+
+a {
+    color: #6AE368;
+}
+
+.error {
+    color: #d9534f;
+}
+
+.rzslider .rz-pointer {
+    background-color: #6AE368 !important;
+}
+
+.rzslider .rz-selection {
+    background-color: #6AE368 !important;
+}
