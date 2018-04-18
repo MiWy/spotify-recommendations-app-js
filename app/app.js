@@ -71,14 +71,6 @@ spotiBar.controller("SearchController", [
   "SharingResultsService",
   function($scope, Spotify, SharingResultsService) {
     let seedsSelection = [];
-    $scope.sliderAcousticness = { value: 0 };
-    $scope.sliderDanceability = { value: 0 };
-    $scope.sliderEnergy = { value: 0 };
-    $scope.sliderLiveness = { value: 0 };
-    $scope.sliderInstrumentalness = { value: 0 };
-    $scope.sliderPopularity = { value: 0 };
-    $scope.sliderSpeechiness = { value: 0 };
-    $scope.sliderValence = { value: 0 };
 
     $scope.searchSeeds = function() {
       $scope.seedsSelection = seedsSelection;
