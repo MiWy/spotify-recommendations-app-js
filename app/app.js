@@ -70,7 +70,7 @@ spotiBar.controller("SearchController", [
   "Spotify",
   "SharingResultsService",
   function($scope, Spotify, SharingResultsService) {
-    let seedsSelection = [];
+    let seedsSelection = {};
 
     $scope.searchSeeds = function() {
       $scope.seedsSelection = seedsSelection;
@@ -138,7 +138,6 @@ spotiBar.controller("SearchController", [
       }
     };
 
-    // Tutaj coś krzaczy, nie składa ponad jeden seed na typ
     prepCriteria = function() {
       let criteria = {};
       if ($scope.seedsSelection.artists != undefined) {
