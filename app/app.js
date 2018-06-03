@@ -1,7 +1,7 @@
 const spotiBar = angular.module("spotiBar", [
   "ngRoute",
   "checklist-model",
-  "spotify",
+  "spotify"
 ]);
 
 spotiBar.config([
