@@ -1,118 +1,213 @@
-<div class=" row justify-content-center">
-        <button type="button" class="btn-primary" ng-click="searchRecommendations()">Search recommendations</button>
-</div>
-<div class="container row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4">
-      <div class="form-group ">
-        <form>
-          <input type="submit" ng-click="searchSeeds()" class="btn-warning" value="Search for seeds">
-            <input type="text"  ng-model="seedsQuery" placeholder="Enter seeds query"/>
-          <label class="spotify-font-color">Limit (1-100):
-            <input type="number" min="1" max="100" ng-model="limit" />
-          </label>
-          <br />
-          <label class="spotify-font-color">Duration (in seconds):
-            <input type="number" ng-model="duration" />
-          </label>
-          <br />
-          <label class="spotify-font-color">Key (0 = C, 2 = D, and so on):
-            <input type="number" min="0" max="11" value="0" ng-model="key" />
-          </label>
-          <br />
-          <label  class="spotify-font-color">Major/Minus (1/0):
-            <input type="number" min="0" max="1" value="0" ng-model="ismajor" />
-          </label>
-          <br />
-          <label  class="spotify-font-color">Tempo (BPM):
-            <input type="number" min="0" max="1000" value="120" ng-model="tempo" />
-          </label>
-          <br />
+<div class="container row mt-5 ml-5">
 
-          <div>
-            <label class="spotify-font-color">Acousticness:
-              <input type="text" ng-model="sliderAcousticness" />
-            </label>
-            <br/>
-            <rzslider rz-slider-model="sliderAcousticness" rz-slider-options="{floor: 0, ceil: 100, step: 1, showSelectionBar: true}"></rzslider>
-          </div>
-          <div>
-            <label class="spotify-font-color">Danceability:
-              <input type="text" min="0" max="100" ng-model="sliderDanceability" />
-            </label>
-            <rzslider rz-slider-model="sliderDanceability" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
-          </div>
-          <div>
-            <label class="spotify-font-color">Energy:
-              <input type="text" min="0" max="100" ng-model="sliderEnergy" />
-            </label>
-            <rzslider rz-slider-model="sliderEnergy" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
-          </div>
-          <div>
-            <label class="spotify-font-color">Liveness:
-              <input type="text" min="0" max="100" ng-model="sliderLiveness" />
-            </label>
-            <rzslider rz-slider-model="sliderLiveness" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
-          </div>
-          <div>
-            <label class="spotify-font-color">Instrumentalness:
-              <input type="text" min="0" max="100" ng-model="sliderInstrumentalness" />
-            </label>
-            <rzslider rz-slider-model="sliderInstrumentalness" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
-          </div>
-          <div>
-            <label class="spotify-font-color">Popularity:
-              <input type="text" min="0" max="100" ng-model="sliderPopularity" />
-            </label>
-            <rzslider rz-slider-model="sliderPopularity" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
-          </div>
-          <div>
-            <label class="spotify-font-color">Speechiness:
-              <input type="text" min="0" max="100" ng-model="sliderSpeechiness" />
-            </label>
-            <rzslider rz-slider-model="sliderSpeechiness" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
-          </div>
-          <div>
-            <label class="spotify-font-color">Valence:
-              <input type="text" min="0" max="100" ng-model="sliderValence" />
-            </label>
-            <rzslider rz-slider-model="sliderValence" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
-          </div>
-        </form>
+  <div class="col-md-6">
+
+    <label class="col-form-label-lg">1. Choose up to five tracks/genres/artists: </label>
+
+    <form class="form-inline">
+      <div class="input-group input-group-lg mx-sm-3 mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Seeds</span>
+        </div>
+        <input type="text" class="form-control" id="form-seeds" placeholder="Type in seeds query" ng-model="seedsQuery">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary" ng-click="searchSeeds()">Find seeds</button>
+        </div>
       </div>
-    </div>
+    </form>
 
+    <label class="col-form-label-lg mr-5">2. Search!</label>
 
+    <button type="button" class="btn btn-success btn-lg btn-block" ng-click="searchRecommendations()">Find tracks</button>
 
-    <div class="col-md-7">
-      <div class="form-group">
+    <label class="col-form-label-lg">* Optional criteria</label>
+
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputDuration" class="col-form-label-sm">Duration: </label>
+          <input id="inputDuration" type="number" class="form-control input-group-sm" ng-model="durationInput" placeholder="Duration in ms (>0)">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputLimit" class="col-form-label-sm">Limit: </label>
+          <input id="inputLimit" type="number" class="form-control input-group-sm" ng-model="limitInput" placeholder="1-100 results">
+        </div>
       </div>
-      <div class="container row">
+    </form>
+
+    <form>
+      <div class="form-row mb-3">
+        <div class="form-group col-md-6">
+          <label for="inputTempo" class="col-form-label-sm">Tempo (BPM): </label>
+          <input id="inputTempo" type="number" class="form-control input-group-sm" ng-model="tempoInput" placeholder="Beats per minute (>0)">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputKey" class="col-form-label-sm">Key: </label>
+          <input id="inputKey" type="number" class="form-control input-group-sm" ng-model="keyInput" placeholder="0 - C, 1 - C#, up to 11">
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputMajor" class="col-sm-5 col-form-label">Major/Minor: </label>
+        <div class="col-sm-7">
+          <select id="inputMajor" class="custom-select" ng-model="isMajorSelect">
+            <option value="">Select....</option>
+            <option value="1">Major</option>
+            <option value="0">Minor</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputAcoustic" class="col-sm-5 col-form-label">Acousticness: </label>
+        <div class="col-sm-7">
+          <select id="inputAcoustic" class="custom-select" ng-model="acousticnessSelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputDanceability" class="col-sm-5 col-form-label">Danceability: </label>
+        <div class="col-sm-7">
+          <select id="inputDanceability" class="custom-select" ng-model="danceabilitySelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputEnergy" class="col-sm-5 col-form-label">Energy: </label>
+        <div class="col-sm-7">
+          <select id="inputEnergy" class="custom-select" ng-model="energySelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputLiveness" class="col-sm-5 col-form-label">Liveness: </label>
+        <div class="col-sm-7">
+          <select id="inputLiveness" class="custom-select" ng-model="livenessSelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputInstrument" class="col-sm-5 col-form-label">Instrumentalness: </label>
+        <div class="col-sm-7">
+          <select id="inputInstrument" class="custom-select" ng-model="instrumentalnessSelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputPopularity" class="col-sm-5 col-form-label">Popularity: </label>
+        <div class="col-sm-7">
+          <select id="inputPopularity" class="custom-select" ng-model="popularitySelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputSpeechiness" class="col-sm-5 col-form-label">Speechiness: </label>
+        <div class="col-sm-7">
+          <select id="inputSpeechiness" class="custom-select" ng-model="speechinessSelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group row">
+        <label for="inputValence" class="col-sm-5 col-form-label">Valence: </label>
+        <div class="col-sm-7">
+          <select id="inputValence" class="custom-select" ng-model="valenceSelect" ng-options="x.level for x in criteriaOptions">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="col-md-6" ng-switch="seedOrInstruction">
+    <div ng-switch-when="seeds">
+      <div class="row">
         <div class="col-md-4">
-          <p class="spotify-font-color">Artists:</p>
+          <label class="col-form-label-lg">Artists:</label>
           <div class="row" ng-repeat="artist in seedsArtists">
-            <input type="checkbox" checklist-model="seedsSelection.artists" checklist-value="artist.id" /> 
-            <span class="spotify-font-color">{{artist.name}}</span>
+            <label>
+              <input type="checkbox" checklist-model="seedsSelection.artists" checklist-value="artist.id" />
+              <span>{{artist.name}}</span>
+            </label>
           </div>
         </div>
-        <div class="col-md-6">
-          <p class="spotify-font-color">Tracks:</p>
+        <div class="col-md-8">
+          <label class="col-form-label-lg">Tracks:</label>
           <div class="row" ng-repeat="track in seedsTracks">
-            <input type="checkbox" checklist-model="seedsSelection.tracks" checklist-value="track.id" /> 
-            <span class="spotify-font-color">{{track.name}} -</span>
-            <span class="spotify-font-color" ng-repeat="artist in track.artists"> &nbsp;{{artist.name}} </span>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <p class="spotify-font-color">Genres:</p>
-          <div class="row" ng-repeat="genre in seedsGenres">
-            <input type="checkbox" checklist-model="seedsSelection.genres" checklist-value="genre" /> 
-            <span class="spotify-font-color">{{genre}}</span>
+            <label>
+              <input type="checkbox" checklist-model="seedsSelection.tracks" checklist-value="track.id" />
+              <span>{{track.name}} -</span>
+              <span ng-repeat="artist in track.artists"> &nbsp;{{artist.name}} </span>
+            </label>
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="col-form-label-lg">Genres:</label>
+          <br>
+          <div class="form-check-inline" ng-repeat="genre in seedsGenres">
+            <label>
+              <input type="checkbox" class="" checklist-model="seedsSelection.genres" checklist-value="genre" /> {{genre}}
+            </label>
+          </div>
+        </div>
+      </div>
 
-      </div>
+    </div>
+    <div ng-switch-when="instruction">
+  
+      <div class="jumbotron  jumbotron-fluid">
+        <div class="container">
+        <h4 class="display-4">How to</h2>
+          <p class="lead">
+            <span class="font-weight-bold">SpotiBar</span> allows you to search Spotify recommendations based on several criteria. In order to use it, you
+            should make sure that:</p>
+            <ol class="list-group mb-4">
+              <li class="list-group-item">You are signed in to your Spotify account. To do so, click the button in the top-right corner</li>
+              <li class="list-group-item">You've selected
+                <span class="font-weight-bold">at least 1 and not more than 5</span> seeds (artists/tracks/genres). You can search for them by quering
+                field on the left</li>
+              <li class="list-group-item">(optional) You can also set optional criteria, such as Duration, Key and others to get more specific recommendations</li>
+            </ol>
+            <hr class="my-4">
+            <p class="lead">Some optional criteria have ranges given in placeholders. Search mechanisms will ignore such criteria that are not within range.
+          </p>
+        </div>
+    </div>
     </div>
   </div>
+</div>

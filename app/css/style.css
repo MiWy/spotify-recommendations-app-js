@@ -1,0 +1,38 @@
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cabin', sans-serif;
+}
+
+.result-img {
+    width:170px;
+    height:170px;
+}
+
+.result-track {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.result-heading-background {
+    background-color: #17C671;
+}
+
+a {
+    color: #17C671;
+}
+
+a:hover {
+    color: #28a745;
+}
+
+.font-white {
+    color: #ffffff;
+}
+
+.navbar-header-link {
+    text-decoration: none !important;
+    color: #E9ECEF;
+}
+
+.error {
+    color: #d9534f;
+}

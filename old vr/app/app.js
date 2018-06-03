@@ -1,7 +1,8 @@
 const spotiBar = angular.module("spotiBar", [
   "ngRoute",
   "checklist-model",
-  "spotify",
+  "rzModule",
+  "spotify"
 ]);
 
 spotiBar.config([
@@ -22,13 +23,14 @@ spotiBar.config([
       });
 
     SpotifyProvider.setClientId("456d199b7ff04a969783dd914c902093");
-    SpotifyProvider.setRedirectUri("ttps://miwy.github.io/spotify-recommendations-app-js/callback");
+    SpotifyProvider.setRedirectUri("https://miwy.github.io/spotify-recommendations-app-js/callback");
     SpotifyProvider.setScope("playlist-read-private");
 
     if (localStorage.getItem("spotify-token")) {
       SpotifyProvider.setAuthToken(localStorage.getItem("spotify-token"));
       console.log("Token got from localStorage.");
     } else {
+      alert("You are not logged in");
       console.log("There was no token in localStorage.");
     }
   }
@@ -49,7 +51,6 @@ spotiBar.controller("LoginController", [
   "Spotify",
   function($scope, Spotify) {
     $scope.login = function() {
-      console.log("starting to login");
       Spotify.login().then(
         function(data) {
           console.log(data);
@@ -71,21 +72,10 @@ spotiBar.controller("SearchController", [
   function($scope, Spotify, SharingResultsService) {
     let seedsSelection = {};
 
-    $scope.seedOrInstruction = "instruction";
-
-    $scope.criteriaOptions = [
-      { level: "Very low", value: "0.00" },
-      { level: "Low", value: "0.25" },
-      { level: "Medium", value: "0.50" },
-      { level: "High", value: "0.75" },
-      { level: "Very high", value: "1.00" }
-    ];
-
     $scope.searchSeeds = function() {
       $scope.seedsSelection = seedsSelection;
       Spotify.getAvailableGenreSeeds().then(
         function(data) {
-          $scope.seedOrInstruction = "seeds";
           $scope.seedsGenres = data.data.genres;
         },
         function(error) {
@@ -159,52 +149,44 @@ spotiBar.controller("SearchController", [
       if ($scope.seedsSelection.genres != undefined) {
         criteria.seed_genres = $scope.seedsSelection.genres.join();
       }
-      if ($scope.limitInput != null) {
-        if ($scope.limitInput > 0 && $scope.limitInput < 101) {
-          criteria.limit = $scope.limitInput;
-        }
+      if ($scope.limit != null) {
+        criteria.limit = $scope.limit;
       }
-      if ($scope.durationInput != null) {
-        if ($scope.durationInput > 0) {
-          criteria.target_duration_ms = $scope.durationInput;
-        }
+      if ($scope.duration != null) {
+        criteria.target_duration_ms = $scope.duration;
       }
-      if ($scope.keyInput != null) {
-        if ($scope.keyInput > -1 && $scope.keyInput < 12) {
-          criteria.target_key = $scope.keyInput;
-        }
+      if ($scope.key != null) {
+        criteria.target_key = $scope.key;
       }
-      if ($scope.isMajorSelect != null) {
-        criteria.target_mode = $scope.isMajorSelect;
+      if ($scope.ismajor != null) {
+        criteria.target_mode = $scope.ismajor;
       }
-      if ($scope.tempoInput != null) {
-        if ($scope.tempoInput > 0) {
-          criteria.target_tempo = $scope.tempoInput;
-        }
+      if ($scope.tempo != null) {
+        criteria.target_tempo = $scope.tempo;
       }
-      if ($scope.acousticnessSelect != null) {
-        criteria.target_acousticness = $scope.acousticnessSelect.value;
+      if (!isNaN($scope.sliderAcousticness)) {
+        criteria.target_acousticness = $scope.sliderAcousticness / 100;
       }
-      if ($scope.danceabilitySelect != null) {
-        criteria.target_danceability = $scope.danceabilitySelect.value;
+      if (!isNaN($scope.sliderDanceability)) {
+        criteria.target_danceability = $scope.sliderDanceability / 100;
       }
-      if ($scope.energySelect != null) {
-        criteria.target_energy = $scope.energySelect.value;
+      if (!isNaN($scope.sliderEnergy)) {
+        criteria.target_energy = $scope.sliderEnergy / 100;
       }
-      if ($scope.livenessSelect != null) {
-        criteria.target_liveness = $scope.livenessSelect.value;
+      if (!isNaN($scope.sliderInstrumentalness)) {
+        criteria.target_instrumentalness = $scope.sliderInstrumentalness / 100;
       }
-      if ($scope.instrumentalnessSelect != null) {
-        criteria.target_instrumentalness = $scope.instrumentalnessSelect.value;
+      if (!isNaN($scope.sliderLiveness)) {
+        criteria.target_liveness = $scope.sliderLiveness / 100;
       }
-      if ($scope.popularitySelect != null) {
-        criteria.target_popularity = $scope.popularitySelect.value;
+      if (!isNaN($scope.sliderPopularity)) {
+        criteria.target_popularity = $scope.sliderPopularity / 100;
       }
-      if ($scope.speechinessSelect != null) {
-        criteria.target_speechiness = $scope.speechinessSelect.value;
+      if (!isNaN($scope.sliderSpeechiness)) {
+        criteria.target_speechiness = $scope.sliderSpeechiness / 100;
       }
-      if ($scope.valenceSelect != null) {
-        criteria.target_valence = $scope.valenceSelect.value;
+      if (!isNaN($scope.sliderValence)) {
+        criteria.target_valence = $scope.sliderValence / 100;
       }
       return criteria;
     };
@@ -218,5 +200,3 @@ spotiBar.controller("ResultsController", [
     $scope.recommendedTracks = SharingResultsService.data.tracks;
   }
 ]);
-
-

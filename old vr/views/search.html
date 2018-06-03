@@ -1,0 +1,118 @@
+<div class=" row justify-content-center">
+        <button type="button" class="btn-primary" ng-click="searchRecommendations()">Search recommendations</button>
+</div>
+<div class="container row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div class="form-group ">
+        <form>
+          <input type="submit" ng-click="searchSeeds()" class="btn-warning" value="Search for seeds">
+            <input type="text"  ng-model="seedsQuery" placeholder="Enter seeds query"/>
+          <label class="spotify-font-color">Limit (1-100):
+            <input type="number" min="1" max="100" ng-model="limit" />
+          </label>
+          <br />
+          <label class="spotify-font-color">Duration (in seconds):
+            <input type="number" ng-model="duration" />
+          </label>
+          <br />
+          <label class="spotify-font-color">Key (0 = C, 2 = D, and so on):
+            <input type="number" min="0" max="11" value="0" ng-model="key" />
+          </label>
+          <br />
+          <label  class="spotify-font-color">Major/Minus (1/0):
+            <input type="number" min="0" max="1" value="0" ng-model="ismajor" />
+          </label>
+          <br />
+          <label  class="spotify-font-color">Tempo (BPM):
+            <input type="number" min="0" max="1000" value="120" ng-model="tempo" />
+          </label>
+          <br />
+
+          <div>
+            <label class="spotify-font-color">Acousticness:
+              <input type="text" ng-model="sliderAcousticness" />
+            </label>
+            <br/>
+            <rzslider rz-slider-model="sliderAcousticness" rz-slider-options="{floor: 0, ceil: 100, step: 1, showSelectionBar: true}"></rzslider>
+          </div>
+          <div>
+            <label class="spotify-font-color">Danceability:
+              <input type="text" min="0" max="100" ng-model="sliderDanceability" />
+            </label>
+            <rzslider rz-slider-model="sliderDanceability" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+          </div>
+          <div>
+            <label class="spotify-font-color">Energy:
+              <input type="text" min="0" max="100" ng-model="sliderEnergy" />
+            </label>
+            <rzslider rz-slider-model="sliderEnergy" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+          </div>
+          <div>
+            <label class="spotify-font-color">Liveness:
+              <input type="text" min="0" max="100" ng-model="sliderLiveness" />
+            </label>
+            <rzslider rz-slider-model="sliderLiveness" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+          </div>
+          <div>
+            <label class="spotify-font-color">Instrumentalness:
+              <input type="text" min="0" max="100" ng-model="sliderInstrumentalness" />
+            </label>
+            <rzslider rz-slider-model="sliderInstrumentalness" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+          </div>
+          <div>
+            <label class="spotify-font-color">Popularity:
+              <input type="text" min="0" max="100" ng-model="sliderPopularity" />
+            </label>
+            <rzslider rz-slider-model="sliderPopularity" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+          </div>
+          <div>
+            <label class="spotify-font-color">Speechiness:
+              <input type="text" min="0" max="100" ng-model="sliderSpeechiness" />
+            </label>
+            <rzslider rz-slider-model="sliderSpeechiness" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+          </div>
+          <div>
+            <label class="spotify-font-color">Valence:
+              <input type="text" min="0" max="100" ng-model="sliderValence" />
+            </label>
+            <rzslider rz-slider-model="sliderValence" rz-slider-options="{floor: 0, ceil: 100, step: 1, precision: 1}"></rzslider>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-7">
+      <div class="form-group">
+      </div>
+      <div class="container row">
+        <div class="col-md-4">
+          <p class="spotify-font-color">Artists:</p>
+          <div class="row" ng-repeat="artist in seedsArtists">
+            <input type="checkbox" checklist-model="seedsSelection.artists" checklist-value="artist.id" /> 
+            <span class="spotify-font-color">{{artist.name}}</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p class="spotify-font-color">Tracks:</p>
+          <div class="row" ng-repeat="track in seedsTracks">
+            <input type="checkbox" checklist-model="seedsSelection.tracks" checklist-value="track.id" /> 
+            <span class="spotify-font-color">{{track.name}} -</span>
+            <span class="spotify-font-color" ng-repeat="artist in track.artists"> &nbsp;{{artist.name}} </span>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <p class="spotify-font-color">Genres:</p>
+          <div class="row" ng-repeat="genre in seedsGenres">
+            <input type="checkbox" checklist-model="seedsSelection.genres" checklist-value="genre" /> 
+            <span class="spotify-font-color">{{genre}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+
+      </div>
+    </div>
+  </div>
